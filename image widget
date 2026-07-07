@@ -1,0 +1,35 @@
+#explore various flutter widgets(text,image,container,etc)#
+
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => MyAppState();
+}
+
+class MyAppState extends State<MyApp> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Image'),
+        ),
+        body: Center(
+          child: Container(
+            height: 200,
+            width: 300,
+            child: Image.network('https://thfvnext.bing.com/th/id/OIP.2dPXv2RH3LVvFcOtNU7RfAHaE7?w=296&h=197&c=7&r=0&o=7&cb=thfvnext&pid=1.7&rm=3'),
+          ),
+        ),
+      ),
+    );
+  }
+}
