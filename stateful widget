@@ -1,0 +1,24 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(const YellowBird());
+
+class YellowBird extends StatefulWidget {
+  const YellowBird({super.key});
+
+  @override
+  State<YellowBird> createState() => _YellowBirdState();
+}
+
+class _YellowBirdState extends State<YellowBird> {
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      home: Scaffold(
+        body: ColoredBox(
+          color: Colors.yellow, // Bright yellow background
+          child: SizedBox.expand(), // fills the whole screen
+        ),
+      ),
+    );
+  }
+}
