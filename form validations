@@ -1,0 +1,70 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(const MyApp());
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(title: Text('simple form with validation')),
+        body: Padding(
+          padding: EdgeInsets.all(16),
+          child: SimpleForm(),
+        ),
+      ),
+    );
+  }
+}
+
+class SimpleForm extends StatefulWidget {
+  const SimpleForm({super.key});
+  @override
+  State<SimpleForm> createState() => _SimpleFormState();
+}
+
+class _SimpleFormState extends State<SimpleForm> {
+  final formKey = GlobalKey<FormState>();
+  final nameCtrl = TextEditingController();
+  final ageCtrl = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: formKey,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          TextFormField(
+            controller: nameCtrl,
+            decoration: const InputDecoration(labelText: 'Name'),
+            validator: (v) => v == null || v.isEmpty ? 'please enter your name' : null,
+          ),
+          TextFormField(
+            controller: ageCtrl,
+            decoration: const InputDecoration(labelText: 'Age'),
+            keyboardType: TextInputType.number,
+            validator: (v) {
+              if (v == null || v.isEmpty) return 'please enter your age';
+              final age = int.tryParse(v);
+              return (age == null || age <= 0) ? 'please enter a valid age' : null;
+            },
+          ),
+          const SizedBox(height: 20),
+          ElevatedButton(
+            onPressed: () {
+              if (formKey.currentState?.validate() ?? false) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('name: ${nameCtrl.text}, Age: ${ageCtrl.text}')),
+                );
+              }
+            },
+            child: const Text('submit'),
+          ),
+        ],
+      ),
+    );
+  }
+}
