@@ -1,0 +1,28 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(const MyApp());
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        body: Builder(
+          builder: (context) {
+            double width = MediaQuery.of(context).size.width;
+
+            if (width < 600) {
+              return const Center(child: Text("Small Screen"));
+            } else if (width < 1200) {
+              return const Center(child: Text("Medium Screen"));
+            } else {
+              return const Center(child: Text("Large Screen"));
+            }
+          },
+        ),
+      ),
+    );
+  }
+}
